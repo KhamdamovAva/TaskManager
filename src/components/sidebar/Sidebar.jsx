@@ -1,6 +1,5 @@
 import pofile from '../../assets/icons/profile_icon.svg'
 
-
 function Sidebar() {
   return (
     <>
@@ -12,12 +11,12 @@ function Sidebar() {
             <p className='text-[10px]'>example@gmail.com</p>
           </div>
         </div>
-        <ul className='mt-[30px] cursor-pointer'>
-          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Today's challenges</li>
-          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Weekly Tasks</li>
-          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Monthly Tasks</li>
-          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>+ add special day</li>
-        </ul>
+        <div className='mt-[30px] cursor-pointer'>
+          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Today's challenges</button>
+          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Weekly Tasks</button>
+          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Monthly Tasks</button>
+          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>+ add special day</button>
+        </div>
       </div>
     </>
 
