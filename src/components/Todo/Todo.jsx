@@ -22,12 +22,12 @@ function Todo() {
         </div>
         <div className="mt-[10px]">
           {todos.map((task, index) => (
-            <input 
-              type="text" 
-              key={index} 
-              placeholder={task} 
-              readOnly 
-              className="border border-[#5200FF] py-[2px] px-[5px] rounded-[4px] w-full mt-[5px]" 
+            <input
+              type="text"
+              key={index}
+              placeholder={task}
+              readOnly
+              className="border border-[#5200FF] py-[2px] px-[5px] rounded-[4px] w-full mt-[5px]"
             />
           ))}
         </div>

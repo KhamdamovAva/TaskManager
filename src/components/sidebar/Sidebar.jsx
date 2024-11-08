@@ -1,6 +1,5 @@
 import pofile from '../../assets/icons/profile_icon.svg'
 
-
 function Sidebar() {
   return (
     <>
