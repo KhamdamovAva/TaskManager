@@ -1,6 +1,6 @@
 import pofile from '../../assets/icons/profile_icon.svg'
 
-function Sidebar() {
+function Sidebar({ setActiveTab }) {
   return (
     <>
       <div className='max-w-[30%] h-[90vh] border-[#5200FF] border-[1px] pt-[40px] '>
@@ -11,11 +11,11 @@ function Sidebar() {
             <p className='text-[10px]'>example@gmail.com</p>
           </div>
         </div>
-        <div className='mt-[30px] cursor-pointer'>
-          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Today's challenges</button>
-          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Weekly Tasks</button>
-          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Monthly Tasks</button>
-          <button className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>+ add special day</button>
+        <div className='mt-[30px] flex flex-col cursor-pointer'>
+          <button onClick={() => setActiveTab('today')} className='p-[6px] pl-[14px] border-t-[#5200FF] text-start border-[1px]'>Today's challenges</button>
+          <button onClick={() => setActiveTab('weekly')} className='p-[6px] pl-[14px] border-t-[#5200FF] text-start border-[1px]'>Weekly Tasks</button>
+          <button onClick={() => setActiveTab('monthly')} className='p-[6px] pl-[14px] border-t-[#5200FF] text-start border-[1px]'>Monthly Tasks</button>
+          <button className='p-[6px] pl-[14px] border-t-[#5200FF] text-start border-[1px]'>+ add special day</button>
         </div>
       </div>
     </>
