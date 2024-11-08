@@ -1,5 +1,5 @@
 import pofile from '../../assets/icons/profile_icon.svg'
-import { sidebarProfile } from './sidebar.js';
+
 
 function Sidebar() {
   return (
@@ -13,13 +13,12 @@ function Sidebar() {
           </div>
         </div>
         <ul className='mt-[30px] cursor-pointer'>
-          {sidebarProfile.map((item) => (
-            <div key={item.id} >
-              <li className='border-t-[1px] border-[#5200FF] pl-[14px]' > {item.title}</li>
-            </div>
-          ))}
-        </ul >
-      </div >
+          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Today's challenges</li>
+          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Weekly Tasks</li>
+          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>Monthly Tasks</li>
+          <li className='p-[6px] pl-[14px] border-t-[#5200FF] border-[1px]'>+ add special day</li>
+        </ul>
+      </div>
     </>
 
   )
