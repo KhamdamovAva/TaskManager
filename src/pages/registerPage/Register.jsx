@@ -1,5 +1,5 @@
+import MainButton from '../../components/buttons/MainButton'
 import Navigation from '../../components/navbar/Navigation'
-import MainButton from '../../components/MainBlackBtn/MainButton'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 

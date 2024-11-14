@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import MainButton from '../../components/MainBlackBtn/MainButton';
-import Navigation from '../../components/navbar/Navigation';
 import { useNavigate } from 'react-router-dom';
+import MainButton from '../../components/buttons/MainButton'
+import Navigation from '../../components/navbar/Navigation'
 
 function Login() {
   const [email, setEmail] = useState('');
