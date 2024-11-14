@@ -1,7 +1,7 @@
 
-function MainButton({ children }) {
+function MainButton({ children, type = 'button' }) {
   return (
-    <button className='bg-black text-white w-[180px] h-[50px] rounded-[5px]'>{children}</button>
+    <button type={type} className='bg-black text-white w-[180px] h-[50px] rounded-[5px]'>{children}</button>
   )
 }
 
