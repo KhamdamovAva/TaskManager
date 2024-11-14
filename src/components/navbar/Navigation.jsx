@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
-import TopBtn from '../TopBlackBtn/TopBtn'
-
+import TopBtn from '../buttons/TopBtn'
 function Navigation() {
   return (
     <>
