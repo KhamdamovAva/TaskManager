@@ -80,10 +80,10 @@ export const verifyOtp = async (otpData) => {
 //     console.error("Ошибка: Email или OTP отсутствует.");
 //     throw new Error("Необходимо указать Email и OTP.");
 //   }
-  
+
 //   // Печатаем данные перед отправкой
 //   console.log("Отправляем запрос подтверждения:", data);
-  
+
 //   try {
 //     const response = await axios.post(
 //       'http://95.130.227.110:8000/api/auth/register/confirm/',
@@ -116,4 +116,3 @@ export const verifyOtp = async (otpData) => {
 // export const refreshToken = (refreshToken) => {
 //   return axios.post(`http://95.130.227.110:8000/api/auth/token/refresh/`, { refresh: refreshToken });
 // };
-
