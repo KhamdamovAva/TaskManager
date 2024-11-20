@@ -1,22 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainP from '../pages/mainPage/MainP';
-import Register from '../pages/registerPage/Register';
-import Login from '../pages/loginPage/Login';
-import UserPage from '../pages/UserPage/UserPage';
-import Message from '../pages/messagePage/Message';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import MainPage from '../pages/Home/MainPage'
+import Register from '../pages/Register/Register'
+import RegisterConfirm from '../pages/Register/RegisterConfirm'
+import Login from '../pages/Login/Login'
 
-function AppRouter({ onRegister }) {
+function AppRouter() {
   return (
-    <Router>
       <Routes>
-        <Route path='/' element={<MainP />} />
-        <Route path='/register' element={<Register onRegister={onRegister} />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/profile' element={<UserPage />} />
-        <Route path='/Message' element={<Message />} />
+        <Route path='/' element={<MainPage /> }/>
+        <Route path='/signup' element={<Register />}/>
+        <Route path='/register-confirm' element={<RegisterConfirm />}/>
+        <Route path='/login' element={<Login />}/>
       </Routes>
-    </Router>
-  );
+  )
 }
 
-export default AppRouter;
+export default AppRouter
