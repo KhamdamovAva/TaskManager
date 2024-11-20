@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Button from '../../components/buttons/Button'
@@ -8,8 +9,8 @@ function MainPage() {
 
   return (
     <>
-    <header className='container borderLine rounded-[6px]'>
-      <Navbar />
+      <header className='container borderLine rounded-[6px]'>
+        <Navbar />
         <div className='pt-[240px] borderLine w-[100%] min-h-[90vh] text-center' >
           <div className='m-auto w-[770px]' >
             <h1 className='font-bold text-[60px]'>Daily Tasks</h1>
@@ -22,7 +23,7 @@ function MainPage() {
             </Link>
           </div>
         </div>
-    </header> 
+      </header>
     </>
   )
 }

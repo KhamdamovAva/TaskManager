@@ -1,19 +1,18 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MainPage from '../pages/Home/MainPage'
-import Register from '../pages/Register/Register'
-import RegisterConfirm from '../pages/Register/RegisterConfirm'
-import Login from '../pages/Login/Login'
-
+import SignUp from '../pages/Register/SignUp'
+import Verify from '../pages/Register/Verify'
+import SignIn from '../pages/Login/SignIn'
 function AppRouter() {
-  return (
-      <Routes>
-        <Route path='/' element={<MainPage /> }/>
-        <Route path='/signup' element={<Register />}/>
-        <Route path='/register-confirm' element={<RegisterConfirm />}/>
-        <Route path='/login' element={<Login />}/>
-      </Routes>
-  )
+        return (
+                <Routes>
+                        <Route path='/' element={<MainPage />} />
+                        <Route path='/signup' element={<SignUp />} />
+                        <Route path='/verify' element={<Verify />} />
+                        <Route path='/login' element={<SignIn />} />
+                </Routes >
+        )
 }
 
 export default AppRouter
