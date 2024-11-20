@@ -41,7 +41,6 @@ function SignUp() {
         e.preventDefault();
         try {
             const response = await signup(data);
-            console.log("Response from API:", response);
             setMessage(response.message || "Signup successful! Please check your email for the OTP.");
             setError("");
             setIsLoading(true);

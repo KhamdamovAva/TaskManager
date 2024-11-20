@@ -26,8 +26,6 @@ function Verify() {
       otp_code: trimmedOtp,
     };
 
-    console.log("OTP Data:", otpData);
-
     //Functions
     const handleOtpChange = (e) => {
       setOtp_code(e.target.value);
@@ -38,7 +36,6 @@ function Verify() {
 
       try {
         const response = await verifyOtp(otpData);
-        console.log("Verification Successful:", response);
         setMessage(response.message || "Verification successful!");
         setError("");
         setIsLoading(true);

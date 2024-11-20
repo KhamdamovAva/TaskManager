@@ -4,7 +4,7 @@ import Navbar from '../../components/navbar/Navbar';
 import { signin, signup } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 
-function SignIn() {
+function SignIn({setUser}) {
     const input = 'border border-[#ECE4E4] p-[10px] rounded-[6px] h-[55px] w-[530px] mt-[10px] mb-[20px] m-auto text-black';
     const label = "text-[18px] font-semibold ml-[20px]";
     const btn = "cursor-pointer bg-black text-white w-[180px] h-[45px] rounded-[5px] text-center m-auto p-[10px]";
@@ -34,19 +34,18 @@ function SignIn() {
     const handleSignIn = async (e) => {
       e.preventDefault();
 
-      console.log("Attempting sign-in with data:", data);
-
       try {
         const response = await signin(data);
         const accessToken = response.access_token;
-        console.log("Access Token Received:", accessToken);
+        const userDetails = { email };  // Вы можете добавить другие данные, если они есть
+        localStorage.setItem("user", JSON.stringify(userDetails));
+        setUser(userDetails);
         localStorage.setItem("accessToken", accessToken);
         setMessage("Sign-in successful!");
         setError("");
         setIsLoading(true);
         navigate("/profile");
       } catch (err) {
-        console.error("Sign-in error:", err);
         setError(err.message || "Invalid email or password. Please try again.");
         setMessage("");
       } finally {

@@ -2,14 +2,16 @@ import React from 'react'
 import profile from '../../assets/images/user_profile.svg';
 import '../../assets/style.css'
 
-function Sidebar() {
+function Sidebar({ user }) {
+   const emailWithoutDomain = user ? user.email.replace('@gmail.com', '') : '';
+
   return (
     <div className='w-[24%] min-h-[89vh] borderLines'>
        <div className='flex items-center py-[40px] px-[10px] space-x-[10px] border-b-[2px] border-[#5200FF]'>
           <img src={profile} alt="img"  />
           <div>
-              <h3 className='font-medium text-[18px]'>User Name</h3>
-              <p className='font-[275]'>example@gmail.com</p>
+            <p className='font-bold font-sans'>Your Email:</p>
+            <p className='font-medium m-auto w-[120px] break-words'>{emailWithoutDomain}</p>
           </div>
        </div>
        <div>
