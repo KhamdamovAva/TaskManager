@@ -46,6 +46,7 @@ function SignUp() {
             setIsLoading(true);
             navigate("/verify", {state: {email: data.email}});
         } catch (e) {
+            console.error("Signup failed:", e);
             setError(e.message || "An error occurred during signup.");
             setMessage("");
         } finally {

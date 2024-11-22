@@ -41,6 +41,7 @@ function Verify() {
         setIsLoading(true);
         navigate("/login");
       } catch (e) {
+        console.error("Verification failed:", e);
         setError(e.message || "Verification failed. Please try again.");
         setMessage("");
       } finally {
