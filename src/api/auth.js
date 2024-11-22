@@ -5,7 +5,7 @@ import axios from "axios";
 export const signup = async (data) => {
   try {
     const response = await axios.post(
-      `https://a745-84-54-83-231.ngrok-free.app/api/auth/signup/`,
+      `https://050c-84-54-83-231.ngrok-free.app/api/auth/signup/`,
       data,
       {
         headers: {
@@ -24,7 +24,7 @@ export const signup = async (data) => {
 export const verifyOtp = async (otpData) => {
   try {
     const response = await axios.post(
-      `https://a745-84-54-83-231.ngrok-free.app/api/auth/verify-otp/`,
+      `https://050c-84-54-83-231.ngrok-free.app/api/auth/verify-otp/`,
       otpData,
       {
         headers: {
@@ -41,7 +41,7 @@ export const verifyOtp = async (otpData) => {
 
 export const signin = async (data) => {
   try {
-    const response = await axios.post(`https://a745-84-54-83-231.ngrok-free.app/api/auth/signin/`,
+    const response = await axios.post(`https://050c-84-54-83-231.ngrok-free.app/api/auth/signin/`,
       data,
     {
       headers: {
