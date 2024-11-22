@@ -5,7 +5,7 @@ import axios from "axios";
 export const signup = async (data) => {
   try {
     const response = await axios.post(
-      `https://ce1d-84-54-80-189.ngrok-free.app/api/auth/signup/`,
+      `https://a745-84-54-83-231.ngrok-free.app/api/auth/signup/`,
       data,
       {
         headers: {
@@ -15,6 +15,7 @@ export const signup = async (data) => {
     );
     return response.data;
   } catch (error) {
+    console.error("Signup Error:", error);
     throw error.response ? error.response.data : { message: "Network error" };
   }
 };
@@ -23,7 +24,7 @@ export const signup = async (data) => {
 export const verifyOtp = async (otpData) => {
   try {
     const response = await axios.post(
-      `https://ce1d-84-54-80-189.ngrok-free.app/api/auth/verify-otp/`,
+      `https://a745-84-54-83-231.ngrok-free.app/api/auth/verify-otp/`,
       otpData,
       {
         headers: {
@@ -33,13 +34,14 @@ export const verifyOtp = async (otpData) => {
     );
     return response.data;
   } catch (error) {
+    console.error("Verify OTP Error:", error);
     throw error.response ? error.response.data : { message: "Network error" };
   }
 };
 
 export const signin = async (data) => {
   try {
-    const response = await axios.post(`https://ce1d-84-54-80-189.ngrok-free.app/api/auth/signin/`,
+    const response = await axios.post(`https://a745-84-54-83-231.ngrok-free.app/api/auth/signin/`,
       data,
     {
       headers: {

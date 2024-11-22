@@ -18,10 +18,18 @@ function Navbar() {
     localStorage.removeItem("accessToken");
     navigate("/");
   }
+  
+  const handleLogoClick = () => {
+    if (isAuthenticated) {
+      navigate("/profile"); // Если авторизован, переход на страницу профиля
+    } else {
+      navigate("/"); // Если не авторизован, переход на главную страницу
+    }
+  };
 
   return (
     <nav className='flex justify-between items-center py-[10px] px-[50px] border border-[#ECE4E4]'>
-      <h3 className='text-[24px] font-bold'><a href="/">🎯 Daily Tasks</a></h3>
+      <h3 onClick={handleLogoClick} className='text-[24px] font-bold'><a href="/">🎯 Daily Tasks</a></h3>
       
       {isAuthenticated ? (
         // Кнопка User (можно сделать выпадающее меню для профиля)
