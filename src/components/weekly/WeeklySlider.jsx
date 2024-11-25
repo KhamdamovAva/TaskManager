@@ -28,24 +28,19 @@ function WeekSlider() {
   };
 
   return (
-    <div className="w-full">
-      {/* Слайдер недели */}
-      <div className="flex items-center justify-between gap-2">
-        {/* Кнопка для перемещения на неделю назад */}
+    <div className="w-full relative">
+        <div className="flex justify-between w-full">
         <button
           onClick={() => changeWeek(-1)}
-          className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full shadow-md"
+          className="rounded-full absolute p-[5px] text-[25px]"
           aria-label="Previous week"
         >
           {'<'}
         </button>
-
-        {/* Кнопки для дней недели */}
-        <div className="flex justify-between flex-grow">
           {daysOfWeek.map((day, index) => (
             <button
               key={index}
-              className={`flex flex-col items-center justify-center px-[10px] text-cent shadow-md ${
+              className={`flex flex-col items-center justify-center px-[10px] text-center w-full ${
                 day.isToday
                   ? 'bg-blue-500 text-white font-semibold' // Активный (сегодняшний) день
                   : selectedDay && selectedDay.isSame(day.dayMoment, 'day')
@@ -61,17 +56,16 @@ function WeekSlider() {
               <p className="text-lg font-medium">{day.date}</p>
             </button>
           ))}
-        </div>
-
-        {/* Кнопка для перемещения на неделю вперед */}
         <button
           onClick={() => changeWeek(1)}
-          className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full shadow-md"
+          className="rounded-full absolute p-[5px] left-[757px] text-[25px]"
           aria-label="Next week"
         >
           {'>'}
         </button>
-      </div>
+        </div>
+
+        {/* Кнопка для перемещения на неделю вперед */}
     </div>
   );
 }
