@@ -11,6 +11,17 @@ function Daily() {
     due_date: '',
   });
 
+  const [tasks, setTasks] = useState({
+    "To Do": [],
+    "In Progress": [],
+    "Done": [],
+  });
+
+  // Состояние для отслеживания открытых блоков
+  const [openedTaskToDo, setOpenedTaskToDo] = useState(null);
+  const [openedTaskInProgress, setOpenedTaskInProgress] = useState(null);
+  const [openedTaskDone, setOpenedTaskDone] = useState(null);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -19,7 +30,7 @@ function Daily() {
     setIsModalOpen(false);
   };
 
-  // Обработчик изменения значений в инпутах, обновлеет измененеия
+  // Обработчик изменения значений в инпутах
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTask((prevTask) => ({
@@ -30,16 +41,35 @@ function Daily() {
 
   // Обновление изменения даты
   const handleDateChange = (date) => {
+    const formattedDate = date.toISOString().split('T')[0];
     setTask((prevTask) => ({
       ...prevTask,
-      due_date: date,
+      due_date: formattedDate,
     }));
   };
 
+  // Обработчик отправки формы
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Task added:', task);
+    setTasks((prevTasks) => {
+      // Добавляем новую задачу в выбранный статус
+      const updatedTasks = { ...prevTasks };
+      updatedTasks[task.status].push(task);
+      return updatedTasks;
+    });
     closeModal();
+    setTask({ title: '', description: '', status: 'To Do', due_date: '' });  // Сброс значений
+  };
+
+  // Функция для обработки клика по задаче
+  const handleTaskClick = (status, index) => {
+    if (status === "To Do") {
+      setOpenedTaskToDo(openedTaskToDo === index ? null : index);
+    } else if (status === "In Progress") {
+      setOpenedTaskInProgress(openedTaskInProgress === index ? null : index);
+    } else if (status === "Done") {
+      setOpenedTaskDone(openedTaskDone === index ? null : index);
+    }
   };
 
   return (
@@ -49,24 +79,47 @@ function Daily() {
           <p>Today 22.04.2024</p>
         </div>
         <div className="flex justify-between px-[10px] py-[10px]">
-          <div>
-            <div className="w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]">
-              <h4 className="text-[20px] font-medium mb-[10px]">To do</h4>
-              <button onClick={openModal}>+ add task</button>
+          {["To Do", "In Progress", "Done"].map((status) => (
+            <div key={status}>
+              <div className="w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]">
+                <h4 className="text-[20px] font-medium mb-[10px]">{status}</h4>
+                {tasks[status].map((task, index) => (
+                  <div
+                    className={`bg-[#5200FF] text-white rounded-[5px] p-[5px] mt-[5px] ${status === "To Do" ? "cursor-pointer" : ""}`}
+                    key={index}
+                    onClick={status === "To Do" || status === "In Progress" || status === "Done" ? () => handleTaskClick(status, index) : undefined}
+                  >
+                    <p>{task.title}</p>
+                    {status === "To Do" && openedTaskToDo === index && (
+                      <div>
+                        <p>{task.description}</p>
+                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
+                      </div>
+                    )}
+                    {status === "In Progress" && openedTaskInProgress === index && (
+                      <div>
+                        <p>{task.description}</p>
+                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
+                      </div>
+                    )}
+                    {status === "Done" && openedTaskDone === index && (
+                      <div>
+                        <p>{task.description}</p>
+                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
+                      </div>
+                    )}
+                    {status !== "To Do" && openedTaskToDo !== index && status !== "In Progress" && openedTaskInProgress !== index && status !== "Done" && openedTaskDone !== index && (
+                      <div>
+                        <p>{task.description}</p>
+                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <button onClick={openModal}>+ add task</button>
+              </div>
             </div>
-          </div>
-          <div>
-            <div className="w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]">
-              <h4 className="text-[20px] font-medium mb-[10px]">In process</h4>
-              <button onClick={openModal}>+ add task</button>
-            </div>
-          </div>
-          <div>
-            <div className="w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]">
-              <h4 className="text-[20px] font-medium mb-[10px]">Done</h4>
-              <button onClick={openModal}>+ add task</button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -97,8 +150,9 @@ function Daily() {
               <DatePicker
                 selected={task.due_date ? new Date(task.due_date) : null}
                 onChange={handleDateChange}
+                required
                 className="w-[260px] mb-[10px] p-[10px] border rounded-[5px]"
-                dateFormat="yyyy-MM-dd" />
+                dateFormat="yyyy-MM-dd" placeholderText='Date' />
               <div className="flex justify-between mt-[10px]">
                 <button type="button" onClick={closeModal} className="bg-red-500 text-white px-[10px] py-[5px] rounded-[5px]">
                   Close
