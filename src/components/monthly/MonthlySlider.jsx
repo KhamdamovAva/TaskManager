@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 
-function MonthlySlider() {
+function MonthSlider() {
   const [currentYear, setCurrentYear] = useState(moment().startOf('year')); // Начало текущего года
   const [selectedMonth, setSelectedMonth] = useState(null); // Состояние для выбранного месяца
 
-  // Функция для смены полугодия
-  const changeHalfYear = (direction) => {
+  // Функция для смены года
+  const changeYear = (direction) => {
     const newYear = moment(currentYear).add(direction, 'year');
     setCurrentYear(newYear);
   };
@@ -20,7 +20,7 @@ function MonthlySlider() {
     };
   });
 
-  // Разделяем на две половины года
+  // Разделяем на два ряда по 6 месяцев
   const firstHalfYear = monthsInYear.slice(0, 6);
   const secondHalfYear = monthsInYear.slice(6, 12);
 
@@ -30,35 +30,36 @@ function MonthlySlider() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
-      {/* Слайдер года */}
-      <div className="flex items-center justify-between gap-2">
+    <div className="w-full relative">
+      {/* Слайдер месяца */}
+      <div className="flex justify-between w-full items-center mb-4">
         {/* Кнопка для перемещения на год назад */}
         <button
-          onClick={() => changeHalfYear(-1)}
-          className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full shadow-md"
+          onClick={() => changeYear(-1)}
+          className="rounded-full absolute p-[5px] text-[25px]"
           aria-label="Previous year"
         >
           {'<'}
         </button>
 
         {/* Год */}
-        <p className="text-xl font-semibold">
-          {currentYear.format('YYYY')} {/* Название текущего года */}
+        <p className="text-xl font-semibold m-auto">
+          {currentYear.format('YYYY')}
         </p>
 
         {/* Кнопка для перемещения на год вперед */}
         <button
-          onClick={() => changeHalfYear(1)}
-          className="p-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full shadow-md"
+          onClick={() => changeYear(1)}
+          className="rounded-full absolute p-[5px] text-[25px] right-0"
           aria-label="Next year"
         >
           {'>'}
         </button>
       </div>
 
-      {/* Отображаем 1-е полугодие */}
-      <div className="grid grid-cols-3 gap-4 mt-4">
+      {/* Отображаем месяцы в 2 ряда */}
+      <div className="grid grid-cols-6 gap-4 w-full">
+        {/* Первый ряд (январь - июнь) */}
         {firstHalfYear.map((month, index) => (
           <button
             key={index}
@@ -75,14 +76,14 @@ function MonthlySlider() {
         ))}
       </div>
 
-      {/* Отображаем 2-е полугодие */}
-      <div className="grid grid-cols-3 gap-4 mt-4">
+      {/* Второй ряд (июль - декабрь) */}
+      <div className="grid grid-cols-6 gap-4 w-full mt-4">
         {secondHalfYear.map((month, index) => (
           <button
             key={index}
             className={`flex flex-col items-center justify-center p-3 rounded-lg shadow-md ${
               selectedMonth && selectedMonth.isSame(month.monthMoment, 'month')
-                ? 'bg-green-500 text-white font-semibold' // Выбранный месяц
+                ? 'bg-[#5200ff] text-white font-semibold' // Выбранный месяц
                 : 'bg-white text-gray-700 border border-gray-200'
             }`}
             onClick={() => handleSelectMonth(month.monthMoment)} // Выбор месяца
@@ -96,4 +97,4 @@ function MonthlySlider() {
   );
 }
 
-export default MonthlySlider;
+export default MonthSlider;
