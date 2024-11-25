@@ -5,7 +5,7 @@ import { createTodo } from '../../api/todo';
 import Button from '../buttons/Button';
 import WeekSlider from './WeeklySlider';
 
-function Monthly() {
+function Weekly() {
   const input = "border border-[#ECE4E4] rounded-lg w-full p-[5px] my-[10px] font-mono";
   const btn = "m-auto border border-black py-[5px] px-[10px] rounded-lg text-white font-medium bg-[#5200ff]";
 
@@ -47,7 +47,7 @@ function Monthly() {
     <>
       {/* Week Navigation */}
       <div className='w-full borderLines'>
-        <div className='borderLines text-center p-[10px]'>
+        <div className='borderLines text-center'>
           <WeekSlider />
         </div>
         <div className='flex justify-between px-[10px] py-[10px]'>
@@ -95,4 +95,4 @@ function Monthly() {
   );
 }
 
-export default Monthly;
+export default Weekly;
