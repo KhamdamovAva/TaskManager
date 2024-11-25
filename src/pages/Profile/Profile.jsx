@@ -3,7 +3,7 @@ import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Daily from '../../components/daily/Daily';
 import Weekly from '../../components/weekly/Weekly';
-import Monthly from '../../components/weekly/Weekly';
+import Monthly from '../../components/monthly/Monthly';
 
 function Profile({ user }) {
   const [selectedTab, setSelectedTab] = useState('daily'); // Состояние для выбранной вкладки
