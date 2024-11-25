@@ -1,172 +1,99 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useState } from 'react'
+import moment from 'moment';
+import Modal from '../modal/Modal';
+import { createTodo } from '../../api/todo';
+import Button from '../buttons/Button';
 
 function Daily() {
+  const input = "border border-[#ECE4E4] rounded-lg w-full p-[5px] my-[10px] font-mono";
+  const btn = "m-auto border border-black py-[5px] px-[10px] rounded-lg text-white font-medium bg-[#5200ff]"
+  const today = moment().format("DD.MM.YYYY");
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [task, setTask] = useState({
-    title: '',
-    description: '',
-    status: 'To Do',
-    due_date: '',
-  });
+  const [error, setError] = useState(null)
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState('todo');
+  const [due_date, setDue_date] = useState(moment().format('YYYY-MM-DD'));
 
-  const [tasks, setTasks] = useState({
-    "To Do": [],
-    "In Progress": [],
-    "Done": [],
-  });
-
-  // Состояние для отслеживания открытых блоков
-  const [openedTaskToDo, setOpenedTaskToDo] = useState(null);
-  const [openedTaskInProgress, setOpenedTaskInProgress] = useState(null);
-  const [openedTaskDone, setOpenedTaskDone] = useState(null);
-
-  const openModal = () => {
-    setIsModalOpen(true);
+  const todo = {
+    title,
+    description,
+    status,
+    due_date,
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const closeModal = () => setIsModalOpen(false);
+  const openModal = () => setIsModalOpen(true);
 
-  // Обработчик изменения значений в инпутах
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setTask((prevTask) => ({
-      ...prevTask,
-      [name]: value,
-    }));
-  };
 
-  // Обновление изменения даты
-  const handleDateChange = (date) => {
-    const formattedDate = date.toISOString().split('T')[0];
-    setTask((prevTask) => ({
-      ...prevTask,
-      due_date: formattedDate,
-    }));
-  };
 
-  // Обработчик отправки формы
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setTasks((prevTasks) => {
-      // Добавляем новую задачу в выбранный статус
-      const updatedTasks = { ...prevTasks };
-      updatedTasks[task.status].push(task);
-      return updatedTasks;
-    });
-    closeModal();
-    setTask({ title: '', description: '', status: 'To Do', due_date: '' });  // Сброс значений
-  };
-
-  // Функция для обработки клика по задаче
-  const handleTaskClick = (status, index) => {
-    if (status === "To Do") {
-      setOpenedTaskToDo(openedTaskToDo === index ? null : index);
-    } else if (status === "In Progress") {
-      setOpenedTaskInProgress(openedTaskInProgress === index ? null : index);
-    } else if (status === "Done") {
-      setOpenedTaskDone(openedTaskDone === index ? null : index);
+    try {
+      const response = await createTodo(todo);
+      console.log(response);
+      // Сброс значений формы
+      setTitle('');
+      setDescription('');
+      setStatus('todo');
+      setDue_date(moment().format('YYYY-MM-DD'));
+      closeModal();
+    } catch (error) {
+      setError(error.message || 'An error occurred');
     }
   };
 
   return (
     <>
-      <div className="w-[76%] borderLines">
-        <div className="bg-[#5200FF] text-white text-center p-[10px]">
-          <p>Today 22.04.2024</p>
+      {/* Fetching Todo */}
+      <div className='w-full borderLines'>
+        <div className='bg-[#5200FF] text-white text-center p-[10px]'>
+          <p>Today {today}</p>
         </div>
         <div className="flex justify-between px-[10px] py-[10px]">
-          {["To Do", "In Progress", "Done"].map((status) => (
-            <div key={status}>
-              <div className="w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]">
-                <h4 className="text-[20px] font-medium mb-[10px]">{status}</h4>
-                {tasks[status].map((task, index) => (
-                  <div
-                    className={`bg-[#5200FF] text-white rounded-[5px] p-[5px] mt-[5px] ${status === "To Do" ? "cursor-pointer" : ""}`}
-                    key={index}
-                    onClick={status === "To Do" || status === "In Progress" || status === "Done" ? () => handleTaskClick(status, index) : undefined}
-                  >
-                    <p>{task.title}</p>
-                    {status === "To Do" && openedTaskToDo === index && (
-                      <div>
-                        <p>{task.description}</p>
-                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
-                      </div>
-                    )}
-                    {status === "In Progress" && openedTaskInProgress === index && (
-                      <div>
-                        <p>{task.description}</p>
-                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
-                      </div>
-                    )}
-                    {status === "Done" && openedTaskDone === index && (
-                      <div>
-                        <p>{task.description}</p>
-                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
-                      </div>
-                    )}
-                    {status !== "To Do" && openedTaskToDo !== index && status !== "In Progress" && openedTaskInProgress !== index && status !== "Done" && openedTaskDone !== index && (
-                      <div>
-                        <p>{task.description}</p>
-                        <p>{task.due_date ? task.due_date : 'No due date'}</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-                <button onClick={openModal}>+ add task</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-[20px] rounded-[10px] w-[300px]">
-            <h2 className="text-[20px] font-semibold mb-[10px]">Add New Task</h2>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="title"
-                value={task.title}
-                onChange={handleInputChange}
-                placeholder="Title"
-                className="w-[260px] mb-[10px] p-[10px] border rounded-[5px]"
-                required />
-              <textarea name="description" value={task.description} onChange={handleInputChange} placeholder="Description"
-                className="w-[260px] mb-[10px] p-[10px] border rounded-[5px]" required />
-              <select
-                name="status"
-                value={task.status}
-                onChange={handleInputChange}
-                className="w-[260px] mb-[10px] p-[10px] border rounded-[5px]">
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Done">Done</option>
-              </select>
-              <DatePicker
-                selected={task.due_date ? new Date(task.due_date) : null}
-                onChange={handleDateChange}
-                required
-                className="w-[260px] mb-[10px] p-[10px] border rounded-[5px]"
-                dateFormat="yyyy-MM-dd" placeholderText='Date' />
-              <div className="flex justify-between mt-[10px]">
-                <button type="button" onClick={closeModal} className="bg-red-500 text-white px-[10px] py-[5px] rounded-[5px]">
-                  Close
-                </button>
-                <button type="submit" className="bg-[#5200FF] text-white px-[10px] py-[5px] rounded-[5px]">
-                  Add Task
-                </button>
-              </div>
-            </form>
+          <div>
+            <div className='w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]'>
+              <h4 className='text-[20px] font-medium mb-[10px]'>To do</h4>
+              <button onClick={openModal} className={btn}>+ add task</button>
+            </div>
+          </div>
+          <div>
+            <div className='w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]'>
+              <h4 className='text-[20px] font-medium mb-[10px]'>In process</h4>
+            </div>
+          </div>
+          <div>
+            <div className='w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]'>
+              <h4 className='text-[20px] font-medium mb-[10px]'>Done</h4>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+      {/* Creating Todo */}
+      <Modal isOpen={isModalOpen}>
+        <div className='flex justify-between items-center'>
+          <h3>Add Task</h3>
+          <button onClick={closeModal} className='w-[10%]'>×</button>
+        </div>
+        <form className='mt-[20px]' onSubmit={handleSubmit}>
+          <input type="text" placeholder='Title' className={input} value={title} onChange={(e) => setTitle(e.target.value)} />
+          <textarea placeholder='Description' className={`${input} resize-none`} value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+          <label className='font-mono mb-[10px]' htmlFor="status">Status:</label><br />
+          <select className={input} name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="todo">Todo</option>
+            <option value="in process">In process</option>
+            <option value="done">Done</option>
+          </select>
+          <input type="date" className={input} value={due_date} onChange={(e) => setDue_date(e.target.value)} />
+          <div className='text-end pt-[40px]'>
+            <Button className={btn} type='submit'>Submit</Button>
+          </div>
+        </form>
+      </Modal>
     </>
-  );
+  )
 }
 
 export default Daily;

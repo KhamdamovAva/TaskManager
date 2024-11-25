@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';  // Импортируем useState
 import profile from '../../assets/images/user_profile.svg';
-import '../../assets/style.css'
+import '../../assets/style.css';
 
-function Sidebar({ user }) {
+function Sidebar({ user, onSelectTab }) {
    const emailWithoutDomain = user ? user.email.replace('@gmail.com', '') : '';
+   const [activeButton, setActiveButton] = useState('daily');  // Состояние для активной кнопки
+
+   // Обработчик нажатия на кнопку
+   const handleButtonClick = (tab) => {
+      setActiveButton(tab);
+      onSelectTab(tab);  // Передаем выбранную вкладку в Profile
+   };
 
    return (
       <div className='w-[24%] min-h-[89vh] borderLines'>
@@ -22,6 +30,7 @@ function Sidebar({ user }) {
          </div>
       </div>
    )
+
 }
 
-export default Sidebar
+export default Sidebar;
