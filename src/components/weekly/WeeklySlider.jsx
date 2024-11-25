@@ -32,7 +32,7 @@ function WeekSlider() {
         <div className="flex justify-between w-full">
         <button
           onClick={() => changeWeek(-1)}
-          className="rounded-full absolute p-[5px] text-[25px]"
+          className="rounded-full absolute p-[5px] top-[5px] text-[25px]"
           aria-label="Previous week"
         >
           {'<'}
@@ -40,11 +40,11 @@ function WeekSlider() {
           {daysOfWeek.map((day, index) => (
             <button
               key={index}
-              className={`flex flex-col items-center justify-center px-[10px] text-center w-full ${
+              className={`flex flex-col items-center justify-center px-[10px] py-[5px] text-center w-full ${
                 day.isToday
                   ? 'bg-blue-500 text-white font-semibold' // Активный (сегодняшний) день
                   : selectedDay && selectedDay.isSame(day.dayMoment, 'day')
-                  ? 'bg-green-500 text-white font-semibold' // Выбранный день
+                  ? 'bg-[#5200ff] text-white font-semibold' // Выбранный день
                   : 'bg-white text-gray-700 border border-gray-200'
               }`}
               onClick={() => handleSelectDay(day.dayMoment)} // Выбор дня
@@ -58,7 +58,7 @@ function WeekSlider() {
           ))}
         <button
           onClick={() => changeWeek(1)}
-          className="rounded-full absolute p-[5px] left-[757px] text-[25px]"
+          className="rounded-full absolute p-[5px] top-[5px] left-[757px] text-[25px]"
           aria-label="Next week"
         >
           {'>'}
