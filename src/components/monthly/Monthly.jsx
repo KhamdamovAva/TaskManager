@@ -8,7 +8,7 @@ import MonthlySlider from './MonthlySlider';
 function Monthly() {
   const input = "border border-[#ECE4E4] rounded-lg w-full p-[5px] my-[10px] font-mono";
   const btn = "m-auto border border-black py-[5px] px-[10px] rounded-lg text-white font-medium bg-[#5200ff]"
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(null)
   const [title, setTitle] = useState('');
@@ -45,7 +45,7 @@ function Monthly() {
 
   return (
     <>
-    {/* Fetching Todo */}
+      {/* Fetching Todo */}
       <div className='w-full borderLines'>
         <div className='text-center p-[10px]'>
           <MonthlySlider />
@@ -70,14 +70,14 @@ function Monthly() {
         </div>
       </div>
 
-    {/* Creating Todo */}
+      {/* Creating Todo */}
       <Modal isOpen={isModalOpen}>
         <div className='flex justify-between items-center'>
           <h3>Add Task</h3>
           <button onClick={closeModal} className='w-[10%]'>×</button>
         </div>
         <form className='mt-[20px]' onSubmit={handleSubmit}>
-          <input type="text"  placeholder='Title' className={input} value={title} onChange={(e) => setTitle(e.target.value)}/>
+          <input type="text" placeholder='Title' className={input} value={title} onChange={(e) => setTitle(e.target.value)} />
           <textarea placeholder='Description' className={`${input} resize-none`} value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
           <label className='font-mono mb-[10px]' htmlFor="status">Status:</label><br />
           <select className={input} name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -85,7 +85,7 @@ function Monthly() {
             <option value="in process">In process</option>
             <option value="done">Done</option>
           </select>
-          <input type="date" className={input} value={due_date} onChange={(e) => setDue_date(e.target.value)}/>
+          <input type="date" className={input} value={due_date} onChange={(e) => setDue_date(e.target.value)} />
           <div className='text-end pt-[40px]'>
             <Button className={btn} type='submit'>Submit</Button>
           </div>
