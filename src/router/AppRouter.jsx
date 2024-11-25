@@ -5,9 +5,10 @@ import SignUp from '../pages/Register/SignUp'
 import Verify from '../pages/Register/Verify'
 import SignIn from '../pages/Login/SignIn'
 import Profile from '../pages/Profile/Profile'
+import Weekly from '../components/weekly/Weekly'
 
 function AppRouter() {
-  const [user, setUser] =useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     // Извлекаем данные пользователя из localStorage
@@ -18,13 +19,14 @@ function AppRouter() {
   }, []);
 
   return (
-      <Routes>
-        <Route path='/' element={<MainPage /> }/>
-        <Route path='/signup' element={<SignUp />}/>
-        <Route path='/verify' element={<Verify />}/>
-        <Route path='/login' element={<SignIn setUser={setUser} />}/>
-        <Route path='/profile' element={<Profile user={user} />}/>
-      </Routes>
+    <Routes>
+      <Route path='/' element={<MainPage />} />
+      <Route path='/signup' element={<SignUp />} />
+      <Route path='/verify' element={<Verify />} />
+      <Route path='/login' element={<SignIn setUser={setUser} />} />
+      <Route path='/profile' element={<Profile user={user} />} />
+      <Route path='/weekly' element={<Weekly />} />
+    </Routes>
   )
 }
 
