@@ -8,7 +8,7 @@ function Daily() {
   const input = "border border-[#ECE4E4] rounded-lg w-full p-[5px] my-[10px] font-mono";
   const btn = "m-auto border border-black py-[5px] px-[10px] rounded-lg text-white font-medium bg-[#5200ff]"
   const today = moment().format("DD.MM.YYYY");
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState(null)
   const [title, setTitle] = useState('');
@@ -25,6 +25,7 @@ function Daily() {
 
   const closeModal = () => setIsModalOpen(false);
   const openModal = () => setIsModalOpen(true);
+
 
 
   const handleSubmit = async (e) => {
@@ -45,12 +46,13 @@ function Daily() {
 
   return (
     <>
-    {/* Fetching Todo */}
+      {/* Fetching Todo */}
       <div className='w-full borderLines'>
         <div className='bg-[#5200FF] text-white text-center p-[10px]'>
           <p>Today {today}</p>
         </div>
-        <div className='flex justify-between px-[10px] py-[10px]'>
+        <div className="flex justify-between px-[10px] py-[10px]">
+
           <div>
             <div className='w-[235px] min-h-[90px] rounded-[10px] borderLines py-[5px] px-[10px]'>
               <h4 className='text-[20px] font-medium mb-[10px]'>To do</h4>
@@ -69,15 +71,14 @@ function Daily() {
           </div>
         </div>
       </div>
-
-    {/* Creating Todo */}
+      {/* Creating Todo */}
       <Modal isOpen={isModalOpen}>
         <div className='flex justify-between items-center'>
           <h3>Add Task</h3>
           <button onClick={closeModal} className='w-[10%]'>×</button>
         </div>
         <form className='mt-[20px]' onSubmit={handleSubmit}>
-          <input type="text"  placeholder='Title' className={input} value={title} onChange={(e) => setTitle(e.target.value)}/>
+          <input type="text" placeholder='Title' className={input} value={title} onChange={(e) => setTitle(e.target.value)} />
           <textarea placeholder='Description' className={`${input} resize-none`} value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
           <label className='font-mono mb-[10px]' htmlFor="status">Status:</label><br />
           <select className={input} name="status" id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -85,7 +86,7 @@ function Daily() {
             <option value="in process">In process</option>
             <option value="done">Done</option>
           </select>
-          <input type="date" className={input} value={due_date} onChange={(e) => setDue_date(e.target.value)}/>
+          <input type="date" className={input} value={due_date} onChange={(e) => setDue_date(e.target.value)} />
           <div className='text-end pt-[40px]'>
             <Button className={btn} type='submit'>Submit</Button>
           </div>
@@ -95,4 +96,4 @@ function Daily() {
   )
 }
 
-export default Daily
+export default Daily;
