@@ -1,11 +1,11 @@
 import axios from "axios";
 
-// const API_URL = "ce1d-84-54-80-189.ngrok-free.app/api/auth";
+const BASE_URL = "https://539b-84-54-83-231.ngrok-free.app/api/auth";
 
 export const signup = async (data) => {
   try {
     const response = await axios.post(
-      `https://050c-84-54-83-231.ngrok-free.app/api/auth/signup/`,
+      `${BASE_URL}/signup/`,
       data,
       {
         headers: {
@@ -24,7 +24,7 @@ export const signup = async (data) => {
 export const verifyOtp = async (otpData) => {
   try {
     const response = await axios.post(
-      `https://050c-84-54-83-231.ngrok-free.app/api/auth/verify-otp/`,
+      `${BASE_URL}/verify-otp/`,
       otpData,
       {
         headers: {
@@ -41,7 +41,7 @@ export const verifyOtp = async (otpData) => {
 
 export const signin = async (data) => {
   try {
-    const response = await axios.post(`https://050c-84-54-83-231.ngrok-free.app/api/auth/signin/`,
+    const response = await axios.post(`${BASE_URL}/signin/`,
       data,
     {
       headers: {
